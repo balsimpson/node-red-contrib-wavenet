@@ -1,0 +1,31 @@
+{
+  "name": "node-red-contrib-wavenet",
+  "version": "1.8.0",
+  "description": "Easily convert text to speech using Google Wavenet voices.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balsimpson/node-red-contrib-wavenet"
+  },
+  "keywords": [
+    "node-red",
+    "wavenet",
+    "tts",
+    "text-to-speech",
+    "voice",
+    "speech"
+  ],
+  "node-red": {
+    "nodes": {
+      "wavenet": "wavenet.js"
+    }
+  },
+  "author": "tinkr",
+  "license": "ISC",
+  "dependencies": {
+    "https": "^1.0.0"
+  }
+}
