@@ -10,8 +10,7 @@
         defaults: {
             name: { value: "Wavenet" },
             key: { value: "", type: "wavenet-config" },
-            language: { value: "random" },
-            gender: { value: "random" }
+            voice: { value: "random" }
         },
         inputs: 1,
         outputs: 1,
@@ -30,7 +29,7 @@
         },
         // label: 'Google Speech API Key',
         label: function () {
-            return 'Google Speech API Key - ' + this.speech_api.substr(0,5);
+            return 'Google Speech API Key - ' + this.speech_api.substr(0, 5);
         }
     });
 </script>
@@ -46,20 +45,23 @@
         <h6><p>Sign in to <a href="https://cloud.google.com/text-to-speech/">Google Developer Console</a> to get a Speech API key.</p></h6>
     </div>
     <div class="form-row">
-        <label for="node-input-language"><i class="icon-tag"></i> Language</label>
-        <select id="node-input-language">
+        <label for="node-input-voice"><i class="icon-tag"></i>Voice</label>
+        <select id="node-input-voice">
             <option value='random' selected>Random</option>
-            <option value='american'>American (en-US)</option>
-            <option value='australian'>Australian (en-AU)</option>
-            <option value='british'>British (en-GB)</option> 
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-gender"><i class="icon-tag"></i>Gender</label>
-        <select id="node-input-gender">
-            <option value='random' selected>Random</option>
-            <option value='male'>Male</option>
-            <option value='female'>Female</option>
+            <option value='russel'>Russel (Australian Male)</option>
+            <option value='thomas'>Thomas (Australian Male)</option>
+            <option value='nicole'>Nicole (Australian Female)</option>
+            <option value='mary'>Mary (Australian Feale)</option>
+            <option value='brian'>Brian (British Male)</option>
+            <option value='thomas'>Paul (British Male)</option>
+            <option value='emma'>Emma (British Female)</option>
+            <option value='amy'>Amy (British Female)</option>
+            <option value='mathew'>Mathew (American Male)</option>
+            <option value='justin'>Justin (American Male)</option>
+            <option value='joanna'>Joanna (American Female)</option>
+            <option value='ivy'>Ivy (American Female)</option>
+            <option value='kimberly'>Kimberly (American Female)</option>
+            <option value='salli'>Salli (American Female)</option>
         </select>
     </div>
 </script>
@@ -80,65 +82,4 @@
     Takes a <code>string</code> as an input. Returns a <code>base64</code> encoded array buffer. Attach a file node to save it as an MP3 on your disk.
     <img src="https://imgur.com/WyF9hBt.png" alt="main flow">
     <br>    
-</script>
-
-<script type="text/javascript">
-    RED.nodes.registerType('name', {
-        category: 'advanced',
-        color: '#44A1A0',
-        defaults: {
-            name: { value: 'Name' },
-            key: { value: '', type: 'name-config' },
-        },
-        inputs: 1,
-        outputs: 1,
-        icon: 'feed.png',
-        label: function () {
-            return this.name || 'name';
-    }
-});
-</script>
-
-<script type="text/javascript">
-    RED.nodes.registerType('name-config', {
-        category: 'config',
-        defaults: {
-            key: { value: '', required: true }
-        },
-        label: function () {
-            return 'name Key - ' + this.key.substr(0,5);
-    }
-});
-</script>
-
-<script type="text/x-red" data-template-name='name'>
-    <div class="form-row">
-        <label for='node-input-name'><i class='icon-tag'></i>Name</label>
-        <input type='text' id='node-input-name' placeholder='Name'>
-    </div>
-    <div class='form-row'>
-        <label for='node-input-key'><i class='icon-tag'></i>API Key</label>
-            <input type='text' id='node-input-key' placeholder='API Key'>
-            <h6><p>Sign in to <a href='url'></a></p></h6>
-    </div>
-    <div class='form-row'>
-        <label for='node-input-name'><i class='icon-tag'></i> name</label>
-        <select id='node-input-name'>
-            <option value='value' selected>value</option>
-            <option value='value' selected>value</option>
-        </select>
-    </div>
-</script>
-
-<script type='text/x-red' data-template-name='name-config'>
-    <div class='form-row'>
-        <label for='node-config-input-key'><i class='icon-bookmark'></i> name Key</label>
-        <input type='text' id='node-config-input-key'>
-    </div>
-</script>
-
-<script type='text/x-red' data-help-name='name'>
-    <h2>Title.</h2>
-    <br>
-    <p>Description</p>
 </script>

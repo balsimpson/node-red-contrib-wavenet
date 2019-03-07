@@ -1,52 +1,94 @@
 const https = require('https');
-let voices = {
-	australian: {
+
+let voice_options = {
+	russel: {
 		language: 'en-AU',
-		male: [
-			['en-AU-Wavenet-B'],
-			['en-AU-Wavenet-D']
-		],
-		female: [
-			['en-AU-Wavenet-A'],
-			['en-AU-Wavenet-C']
-		]
+		gender: 'male',
+		wav: 'en-AU-Wavenet-B'
 	},
-	british: {
+	thomas: {
+		language: 'en-AU',
+		gender: 'male',
+		wav: 'en-AU-Wavenet-D'
+	},
+	nicole: {
+		language: 'en-AU',
+		gender: 'female',
+		wav: 'en-AU-Wavenet-A'
+	},
+	mary: {
+		language: 'en-AU',
+		gender: 'female',
+		wav: 'en-AU-Wavenet-C'
+	},
+	brian: {
 		language: 'en-GB',
-		male: [
-			['en-GB-Wavenet-B'],
-			['en-GB-Wavenet-D']
-		],
-		female: [
-			['en-GB-Wavenet-A'],
-			['en-GB-Wavenet-C'],
-		]
+		gender: 'male',
+		wav: 'en-GB-Wavenet-B'
 	},
-	american: {
+	paul: {
+		language: 'en-GB',
+		gender: 'male',
+		wav: 'en-GB-Wavenet-D'
+	},
+	emma: {
+		language: 'en-GB',
+		gender: 'female',
+		wav: 'en-GB-Wavenet-A'
+	},
+	amy: {
+		language: 'en-GB',
+		gender: 'female',
+		wav: 'en-GB-Wavenet-C'
+	},
+	mathew: {
 		language: 'en-US',
-		male: [
-			['en-US-Wavenet-B'],
-			['en-US-Wavenet-D'],
-		],
-		female: [
-			['en-US-Wavenet-A'],
-			['en-US-Wavenet-C'],
-			['en-US-Wavenet-E'],
-			['en-US-Wavenet-F']
-		]
+		gender: 'male',
+		wav: 'en-US-Wavenet-B'
+	},
+	justin: {
+		language: 'en-US',
+		gender: 'male',
+		wav: 'en-US-Wavenet-D'
+	},
+	joanna: {
+		language: 'en-US',
+		gender: 'female',
+		wav: 'en-US-Wavenet-A'
+	},
+	Ivy: {
+		language: 'en-US',
+		gender: 'female',
+		wav: 'en-US-Wavenet-C'
+	},
+	kimberly: {
+		language: 'en-US',
+		gender: 'female',
+		wav: 'en-US-Wavenet-E'
+	},
+	salli: {
+		language: 'en-US',
+		gender: 'female',
+		wav: 'en-US-Wavenet-F'
 	}
 }
 
-let languages = [
-	"american",
-	"australian",
-	"british"
-];
-
-let genders = [
-	"male",
-	"female"
-];
+let voice_names = [
+	"russel",
+	"thomas",
+	"nicole",
+	"mary",
+	"brian",
+	"paul",
+	"emma",
+	"amy",
+	"mathew",
+	"justin",
+	"joanna",
+	"Ivy",
+	"kimberly",
+	"salli"
+]
 
 const makeHttpCall = async (options) => {
 	try {
@@ -79,20 +121,19 @@ const randomItem = (arrayOfItems) => {
 	return (arrayOfItems[i]);
 };
 
-const getVoice = (language, gender) => {
-	gender = (gender == 'random') ? randomItem(genders) : gender;
-	language = (language == 'random') ? randomItem(languages) : language;
-	let voice = randomItem(voices[language][gender]);
+const getVoice = (voice) => {
+	voice = (voice == 'random') ? randomItem(voice_names) : voice;
+	let chosen = voice_options[voice];
 	let data = {
-		languageCode: voices[language].language,
-		gender: gender,
-		voice: voice[0]
+		languageCode: chosen.language,
+		gender: chosen.gender,
+		voice: chosen.wav
 	}
 	return data;
 }
 
 const getAudioFile = async (txt, data) => {
-	// console.log(`data1: ${JSON.stringify(data, null, 2)}`);
+	
 	let options = {
 		host: 'texttospeech.googleapis.com',
 		port: 443,
@@ -138,7 +179,7 @@ module.exports = function (RED) {
 			let key = RED.nodes.getNode(config.key);
 			let txt = msg.payload;
 
-			let voice = getVoice(config.language, config.gender);
+			let voice = getVoice(config.voice);
 			voice.key = key.speech_api;
 			// msg.voice = voice;
 
@@ -151,8 +192,6 @@ module.exports = function (RED) {
 					try {
 						// console.log('getting file:');
 						var load = value.replace(/\s+/g, '');      // remove any whitespace
-						//var load = value.replace(/[\t\r\n\f]+/g,'');
-						//var load = value;
 						if (regexp.test(load) && (load.length % 4 === 0)) {
 							value = Buffer.from(load, 'base64');
 							node.status({ fill: "green", shape: "dot", text: `${voice.languageCode} - ${voice.gender}` });
