@@ -1,6 +1,31 @@
 const https = require('https');
 
 let voice_options = {
+  janjaap: {
+    language: 'nl-Nl',
+    gender: 'male',
+    wav: 'nl-Nl-Wavenet-B'
+  },
+  kees: {
+    language: 'nl-Nl',
+    gender: 'male',
+    wav: 'nl-Nl-Wavenet-C'
+  },
+  sjaan: {
+    language: 'nl-Nl',
+    gender: 'female',
+    wav: 'nl-Nl-Wavenet-D'
+  },
+  bep: {
+    language: 'nl-Nl',
+    gender: 'Female',
+    wav: 'nl-Nl-Wavenet-E'
+  },
+  miep: {
+    language: 'nl-Nl',
+    gender: 'female',
+    wav: 'nl-Nl-Wavenet-A'
+  },
 	russel: {
 		language: 'en-AU',
 		gender: 'male',
