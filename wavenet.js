@@ -1,31 +1,31 @@
 const https = require('https');
 
 let voice_options = {
-  janjaap: {
-    language: 'nl-Nl',
-    gender: 'male',
-    wav: 'nl-Nl-Wavenet-B'
-  },
-  kees: {
-    language: 'nl-Nl',
-    gender: 'male',
-    wav: 'nl-Nl-Wavenet-C'
-  },
-  sjaan: {
-    language: 'nl-Nl',
-    gender: 'female',
-    wav: 'nl-Nl-Wavenet-D'
-  },
-  bep: {
-    language: 'nl-Nl',
-    gender: 'Female',
-    wav: 'nl-Nl-Wavenet-E'
-  },
-  miep: {
-    language: 'nl-Nl',
-    gender: 'female',
-    wav: 'nl-Nl-Wavenet-A'
-  },
+	janjaap: {
+		language: 'nl-Nl',
+		gender: 'male',
+		wav: 'nl-Nl-Wavenet-B'
+	},
+	kees: {
+		language: 'nl-Nl',
+		gender: 'male',
+		wav: 'nl-Nl-Wavenet-C'
+	},
+	sjaan: {
+		language: 'nl-Nl',
+		gender: 'female',
+		wav: 'nl-Nl-Wavenet-D'
+	},
+	bep: {
+		language: 'nl-Nl',
+		gender: 'Female',
+		wav: 'nl-Nl-Wavenet-E'
+	},
+	miep: {
+		language: 'nl-Nl',
+		gender: 'female',
+		wav: 'nl-Nl-Wavenet-A'
+	},
 	russel: {
 		language: 'en-AU',
 		gender: 'male',
@@ -81,7 +81,7 @@ let voice_options = {
 		gender: 'female',
 		wav: 'en-US-Wavenet-A'
 	},
-	Ivy: {
+	ivy: {
 		language: 'en-US',
 		gender: 'female',
 		wav: 'en-US-Wavenet-C'
@@ -95,10 +95,21 @@ let voice_options = {
 		language: 'en-US',
 		gender: 'female',
 		wav: 'en-US-Wavenet-F'
-	}
+	},
+	ella: {
+		language: 'da-DK',
+		gender: 'female',
+		wav: 'da-DK-Wavenet-A'
+	},
 }
 
 let voice_names = [
+	"mathew",
+	"justin",
+	"joanna",
+	"ivy",
+	"kimberly",
+	"salli",
 	"russel",
 	"thomas",
 	"nicole",
@@ -107,12 +118,12 @@ let voice_names = [
 	"paul",
 	"emma",
 	"amy",
-	"mathew",
-	"justin",
-	"joanna",
-	"Ivy",
-	"kimberly",
-	"salli"
+	"ella",
+	"janjaap",
+	"kees",
+	"sjaan",
+	"bep",
+	"miep"
 ]
 
 const makeHttpCall = async (options) => {
@@ -158,7 +169,7 @@ const getVoice = (voice) => {
 }
 
 const getAudioFile = async (txt, data) => {
-	
+
 	let options = {
 		host: 'texttospeech.googleapis.com',
 		port: 443,
