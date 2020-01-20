@@ -492,8 +492,8 @@ const getVoice = (voice) => {
 	let chosen = voice_options[voice];
 	let data = {
 		languageCode: chosen.language,
-		gender: chosen.gender,
-		voice: chosen.wav
+		ssmlGender: chosen.gender,
+		name: chosen.wav
 	}
 	return data;
 }
