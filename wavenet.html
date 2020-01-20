@@ -6,9 +6,7 @@
             name: { value: "Wavenet" },
             key: { value: "", type: "wavenet-config" },
             voice: { value: "random" },
-            rate: {
-                value: 1.0
-            },
+            rate: { value: "1.0" },
             pitch: {
                 value: 0,
                 validate: function (p) {
@@ -19,7 +17,16 @@
                     }
                 }
             },
-            volume: { value: 0 },
+            volume: {
+                value: 0,
+                validate: function (v) {
+                    if (v <= 10 && v >= -10) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
             sample: { value: 24000 },
             encoding: { value: 'MP3' }
         },
