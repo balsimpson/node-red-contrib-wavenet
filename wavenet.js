@@ -570,14 +570,14 @@ module.exports = function (RED) {
 						var load = value.replace(/\s+/g, '');      // remove any whitespace
 						if (regexp.test(load) && (load.length % 4 === 0)) {
 							value = Buffer.from(load, 'base64');
-							node.status({ fill: 'green', shape: 'dot', text: `${voice.languageCode} - ${voice.gender}` });
+							node.status({ fill: 'green', shape: 'dot', text: `${voice.languageCode} - ${voice.ssmlGender}` });
 							msg.payload = value;
 							node.send(msg);
 						}
 						else {
 							node.log('Not a Base64 string - maybe we should encode it...');
 							value = Buffer.from(value).toString('base64');
-							node.status({ fill: 'green', shape: 'ring', text: `${voice.languageCode} - ${voice.gender}` });
+							node.status({ fill: 'green', shape: 'ring', text: `${voice.languageCode} - ${voice.ssmlGender}` });
 							msg.payload = value;
 							// RED.util.setMessageProperty(msg, node.property, value);
 							node.send(msg);
