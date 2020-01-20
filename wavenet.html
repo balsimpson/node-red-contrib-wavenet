@@ -35,6 +35,9 @@
         icon: "feed.png",
         label: function () {
             return this.name || "wavenet";
+        },
+        oneditprepare: function() {
+            $("#node-input-volume").val() = config.volume || 0;
         }
     });
 </script>
