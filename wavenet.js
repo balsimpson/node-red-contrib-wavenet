@@ -515,8 +515,8 @@ const getAudioFile = async (txt, data) => {
 			},
 			'voice': {
 				'languageCode': data.languageCode,
-				'wav': data.voice,
-				'gender': data.gender
+				'name': data.name,
+				'ssmlGender': data.ssmlGender
 			},
 			'audioConfig': {
 				'speakingRate': data.config.rate,

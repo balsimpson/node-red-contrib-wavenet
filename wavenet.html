@@ -116,26 +116,37 @@
     </div>
 	
 	<div class="form-row">
-		<label for="node-input-rate"><i class="icon-tag"></i>Speaking rate</label>
-		<input type="range" min="0.25" max="4.0" value="1.0" step="0.25" class="slider" id="node-input-rate" 
-		onchange="(function(){document.getElementById('rate_slider_value').innerHTML = document.getElementById('node-input-rate').value;})()">
-		<span id="rate_slider_value" style="color:black;">1</span>
+        <label for="node-input-rate"><i class="icon-tag"></i>Speaking rate</label>
+        <select id="node-input-rate">
+            <option value='0.25'>0.25</option>
+            <option value='0.50'>0.50</option>
+            <option value='0.75'>0.75</option>
+            <option value='1.0' selected>1.0</option>
+            <option value='1.25'>1.25</option>
+            <option value='1.50'>1.50</option>
+            <option value='1.75'>1.75</option>
+            <option value='2.0'>2.0</option>
+            <option value='2.25'>2.25</option>
+            <option value='2.50'>2.50</option>
+            <option value='2.75'>2.75</option>
+            <option value='3.0'>3.0</option>
+            <option value='3.25'>3.25</option>
+            <option value='3.50'>3.50</option>
+            <option value='3.75'>3.75</option>
+            <option value='4.0'>4.0</option>
+        </select>
 		<div>In the range of 0.25 to 4.0. 1.0 is the normal native speed. 2.0 is twice as fast, and 0.5 is half as fast.</div>
 	</div> 
 	
 	<div class="form-row">
 		<label for="node-input-pitch"><i class="icon-tag"></i>Pitch</label>
-		<input type="range" min="-20" max="20" value="0" step="1" class="slider" id="node-input-pitch" 
-		onchange="(function(){document.getElementById('pitch_slider_value').innerHTML = document.getElementById('node-input-pitch').value;})()">
-		<span id="pitch_slider_value" style="color:black;">1</span>
+		<input type="number" value=0 id="node-input-pitch">
 		<div>In the range -20.0 to 20.0. 20 means increase 20 semitones from the original pitch. -20 means decrease 20 semitones from the original pitch.</div>
 	</div>
 	
 	<div class="form-row">
 		<label for="node-input-volume"><i class="icon-tag"></i>Volume</label>
-		<input type="range" min="-6" max="6" value="0" step="1" class="slider" id="node-input-volume" 
-		onchange="(function(){document.getElementById('volume_slider_value').innerHTML = document.getElementById('node-input-volume').value;})()">
-		<span id="volume_slider_value" style="color:black;">1</span>
+		<input type="number" value=0 id="node-input-volume">
 		<div>A value of -6.0 (dB) will play at approximately half the amplitude and a value of +6.0 (dB) will play at approximately twice the amplitude of the normal native signal.</div>
 	</div>
 	
