@@ -37,7 +37,11 @@
             return this.name || "wavenet";
         },
         oneditprepare: function() {
-            $("#node-input-volume").val(0);
+            $("#node-input-rate").val(this.rate || "1.0");
+            $("#node-input-pitch").val(this.pitch || 0);
+            $("#node-input-volume").val(this.volume || 0);
+            $("#node-input-sample").val(this.sample || 24000);
+            $("#node-input-encoding").val(this.encoding || 'MP3');
         }
     });
 </script>
