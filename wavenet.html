@@ -135,31 +135,21 @@
             <option value='3.75'>3.75</option>
             <option value='4.0'>4.0</option>
         </select>
-		<div>In the range of 0.25 to 4.0. 1.0 is the normal native speed. <br>2.0 is twice as fast, and 0.5 is half as fast.</div>
 	</div> 
 	
 	<div class="form-row">
 		<label for="node-input-pitch"><i class="icon-tag"></i>Pitch</label>
 		<input type="number" value=0 id="node-input-pitch">
-        <div>In the range -20.0 to 20.0. 20 means increase <br>
-            20 semitones from the original pitch. -20 means <br>
-            decrease 20 semitones from the original pitch.</div>
 	</div>
 	
 	<div class="form-row">
-		<label for="node-input-volume"><i class="icon-tag"></i>Volume</label>
+		<label for="node-input-volume"><i class="icon-tag"></i>Volume gain</label>
 		<input type="number" value=0 id="node-input-volume">
-        <div>A value of -6.0 (dB) will play at approximately <br>
-            half the amplitude and a value of +6.0 (dB) will play <br>
-            at approximately twice the amplitude of the normal native signal.</div>
 	</div>
 	
 	<div class="form-row">
 		<label for="node-input-sample"><i class="icon-tag"></i>Sample rate (Hz)</label>
 		<input type="number" id="node-input-sample" value="24000" placeholder="API Key">
-        <div>The synthesis sample rate (in hertz). When this <br>
-            is specified, the synthesizer will honor this <br>
-            request by converting to the desired sample rate.</div>
 	</div>
 	
 	<div class="form-row">
@@ -169,7 +159,6 @@
 			<option value='LINEAR16'>LINEAR16</option>
 			<option value='OGG_OPUS'>OGG_OPUS</option>
 		</select>
-		<div>The format of the audio byte stream.</div>
 	</div>
 
 	<div>

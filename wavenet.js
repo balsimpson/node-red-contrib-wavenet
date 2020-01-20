@@ -529,8 +529,8 @@ const getAudioFile = async (txt, data) => {
 		method: 'POST'
 	};
 
+	console.log(`options: ${JSON.stringify(options, null, 2)}`);
 	let resp = await makeHttpCall(options);
-	// console.log(`resp: ${JSON.stringify(resp, null, 2)}`);
 	if (resp.error) {
 		return { error: resp.error.message };
 	} else {
@@ -572,6 +572,7 @@ module.exports = function (RED) {
 							value = Buffer.from(load, 'base64');
 							node.status({ fill: 'green', shape: 'dot', text: `${voice.languageCode} - ${voice.ssmlGender}` });
 							msg.payload = value;
+							msg.voice = voice;
 							node.send(msg);
 						}
 						else {
