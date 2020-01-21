@@ -559,35 +559,41 @@ module.exports = function (RED) {
 				encoding: config.encoding
 			}
 
-			let audioContent = getAudioFile(txt, voice);
-			audioContent.then((value) => {
-				if (value.error) {
-					node.status({ fill: 'red', shape: 'ring', text: 'API error' });
-					node.error(value.error);
-				} else {
-					try {
-						var load = value.replace(/\s+/g, '');      // remove any whitespace
-						if (regexp.test(load) && (load.length % 4 === 0)) {
-							value = Buffer.from(load, 'base64');
-							node.status({ fill: 'green', shape: 'dot', text: `${voice.languageCode} - ${voice.ssmlGender}` });
-							msg.payload = value;
-							// msg.voice = voice;
-							node.send(msg);
+			// check if txt is string
+			if (typeof txt === 'string') {
+				let audioContent = getAudioFile(txt, voice);
+				audioContent.then((value) => {
+					if (value.error) {
+						node.status({ fill: 'red', shape: 'ring', text: 'API error' });
+						node.error(value.error);
+					} else {
+						try {
+							var load = value.replace(/\s+/g, '');      // remove any whitespace
+							if (regexp.test(load) && (load.length % 4 === 0)) {
+								value = Buffer.from(load, 'base64');
+								node.status({ fill: 'green', shape: 'dot', text: `${voice.languageCode} - ${voice.ssmlGender}` });
+								msg.payload = value;
+								// msg.voice = voice;
+								node.send(msg);
+							}
+							else {
+								node.log('Not a Base64 string');
+								value = Buffer.from(value).toString('base64');
+								node.status({ fill: 'green', shape: 'ring', text: `${voice.languageCode} - ${voice.ssmlGender}` });
+								msg.payload = value;
+								// RED.util.setMessageProperty(msg, node.property, value);
+								node.send(msg);
+							}
+						} catch (error) {
+							node.status({ fill: 'red', shape: 'dot', text: 'error' });
+							node.error(error);
 						}
-						else {
-							node.log('Not a Base64 string');
-							value = Buffer.from(value).toString('base64');
-							node.status({ fill: 'green', shape: 'ring', text: `${voice.languageCode} - ${voice.ssmlGender}` });
-							msg.payload = value;
-							// RED.util.setMessageProperty(msg, node.property, value);
-							node.send(msg);
-						}
-					} catch (error) {
-						node.status({ fill: 'red', shape: 'dot', text: 'error' });
-						node.error(error);
 					}
-				}
-			});
+				});
+			} else {
+				node.status({ fill: 'red', shape: 'ring', text: 'Input error' });
+				node.error('msg.payload is not a text string!');
+			}
 		});
 	}
 
