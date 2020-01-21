@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('wavenet', {
         category: 'advanced',
-        color: '#44A1A0',
+        color: '#0F9D58',
         defaults: {
             name: { value: "Wavenet" },
             key: { value: "", type: "wavenet-config" },
@@ -206,11 +206,17 @@
     </p>
     <br>
     Takes a <code>string</code> as an input. Returns a <code>base64</code> encoded array buffer. Attach a file node to save it as an audio on your disk.
+
+    <br>
     <img src="https://imgur.com/WyF9hBt.png" alt="main flow">
     <br>
 
     <h3>Inputs</h3>
     <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string</span>
+        </dt>
+        <dd> Use SSML in your tet string to give it more personality. You can use all SSML elements mentioned at https://cloud.google.com/text-to-speech/docs/ssml</dd>
         <dt>voice
             <span class="property-type">string</span>
         </dt>
