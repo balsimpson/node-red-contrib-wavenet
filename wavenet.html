@@ -1,22 +1,48 @@
-<!-- 
-    lightBrown: #FDF0C2
-    green: #44A1A0
- -->
-
 <script type="text/javascript">
     RED.nodes.registerType('wavenet', {
         category: 'advanced',
-        color: '#44A1A0',
+        color: '#7BCFA9',
         defaults: {
             name: { value: "Wavenet" },
             key: { value: "", type: "wavenet-config" },
-            voice: { value: "random" }
+            voice: { value: "random" },
+            rate: { value: "1.0" },
+            pitch: {
+                value: 0,
+                validate: function (p) {
+                    if (p <= 20 && p >= -20) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            volume: {
+                value: 0,
+                validate: function (v) {
+                    if (v <= 10 && v >= -10) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            sample: { value: 24000 },
+            encoding: { value: 'MP3' }
         },
         inputs: 1,
         outputs: 1,
         icon: "feed.png",
         label: function () {
-            return this.name || "wavenet";
+            return this.voice || "wavenet";
+        },
+        oneditprepare: function() {
+            $("#node-input-voice").val(this.voice || "random");
+            $("#node-input-rate").val(this.rate || "1.0");
+            $("#node-input-pitch").val(this.pitch || 0);
+            $("#node-input-volume").val(this.volume || 0);
+            $("#node-input-sample").val(this.sample || 24000);
+            $("#node-input-encoding").val(this.encoding || 'MP3');
         }
     });
 </script>
@@ -36,40 +62,134 @@
 
 <script type="text/x-red" data-template-name="wavenet">
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i>Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
+		<label for="node-input-name"><i class="icon-tag"></i>Name</label>
+		<input type="text" id="node-input-name" placeholder="Name">
+	</div>
+
     <div class="form-row">
         <label for="node-input-key"><i class="icon-tag"></i>API Key</label>
         <input type="text" id="node-input-key" placeholder="API Key">
         <h6><p>Sign in to <a href="https://cloud.google.com/text-to-speech/">Google Developer Console</a> to get a Speech API key.</p></h6>
     </div>
-    <div class="form-row">
+	
+	<div class="form-row">
         <label for="node-input-voice"><i class="icon-tag"></i>Voice</label>
         <select id="node-input-voice">
             <option value='random' selected>Random</option>
-            <option value='mathew'>Mathew (American Male)</option>
-            <option value='justin'>Justin (American Male)</option>
-            <option value='joanna'>Joanna (American Female)</option>
-            <option value='ivy'>Ivy (American Female)</option>
-            <option value='kimberly'>Kimberly (American Female)</option>
-            <option value='salli'>Salli (American Female)</option>
-            <option value='russel'>Russel (Australian Male)</option>
-            <option value='thomas'>Thomas (Australian Male)</option>
-            <option value='nicole'>Nicole (Australian Female)</option>
-            <option value='mary'>Mary (Australian Female)</option>
-            <option value='brian'>Brian (British Male)</option>
-            <option value='thomas'>Paul (British Male)</option>
-            <option value='emma'>Emma (British Female)</option>
-            <option value='amy'>Amy (British Female)</option>
-            <option value='ella'>Ella (Danish Female)</option>
-            <option value='janjaap'>Janjaap (Dutch Male)</option>
-            <option value='kees'>Kees (Dutch Male)</option>
-            <option value='sjaan'>Sjaan (Dutch Female)</option>
-            <option value='bep'>Bep (Dutch Female)</option>
-            <option value='miep'>Miep (Dutch Female)</option>
+            <option value='mathew'>Mathew (American male)</option> 
+            <option value='justin'>Justin (American male)</option> 
+            <option value='joanna'>Joanna (American female)</option> 
+            <option value='ivy'>Ivy (American female)</option> 
+            <option value='kimberly'>Kimberly (American female)</option> 
+            <option value='salli'>Salli (American female)</option>  
+            <option value='amina'>Amina (Arabian female)</option> 
+            <option value='amir'>Amir (Arabian male)</option>  
+            <option value='russel'>Russel (Australian male)</option> 
+            <option value='thomas'>Thomas (Australian male)</option> 
+            <option value='nicole'>Nicole (Australian female)</option> 
+            <option value='mary'>Mary (Australian female)</option> 
+            <option value='brian'>Brian (British male)</option> 
+            <option value='emma'>Emma (British female)</option> 
+            <option value='amy'>Amy (British female)</option> 
+            <option value='chen'>Chen (Chinese Mandarin female)</option>  
+            <option value='chang'>Chang (Chinese Mandarin male)</option>  
+            <option value='hu'>Hu (Chinese Mandarin male)</option> 
+            <option value='mei'>Mei (Chinese Mandarin female)</option>  
+            <option value='lucie'>Lucie (Czech female)</option>  
+            <option value='janjaap'>Janjaap (Dutch male)</option> 
+            <option value='kees'>Kees (Dutch male)</option> 
+            <option value='sjaan'>Sjaan (Dutch female)</option>  
+            <option value='bep'>Bep (Dutch female)</option> 
+            <option value='miep'>Miep (Dutch female)</option> 
+            <option value='ella'>Ella (Finnish female)</option> 
+            <option value='sofia'>Sofia (German female)</option>  
+            <option value='ben'>Ben (German male)</option>  
+            <option value='lyra'>Lyra (Greek female)</option>  
+            <option value='aparna'>Aparna (Inidan female)</option>  
+            <option value='rahul'>Rahul (Indian male)</option> 
+            <option value='darna'>Darna (Filippino female)</option>  
+            <option value='olivia'>Olivia (French Canadian female)</option>  
+            <option value='liam'>Liam (French Canadian male)</option>  
+            <option value='sarah'>Sarah (French female)</option> 
+            <option value='victor'>Victor (French male)</option>  
+            <option value='simran'>Simran (Hindi female)</option> 
+            <option value='jai'>Jai (Hindi male)</option> 
+            <option value='nora'>Nora (Hungarian female)</option> 
+            <option value='melati'>Melati (Indonesian female)</option> 
+            <option value='agung'>Agung (Indonesian male)</option> 
+            <option value='gabriella'>Gabriella (Italian female)</option> 
+            <option value='antonio'>Antonio (Italian male)</option> 
+            <option value='yuna'>Yuna (Japanese female)</option> 
+            <option value='asahi'>Asahi (Japanese male)</option> 
+            <option value='misun'>Misun (Korean female)</option> 
+            <option value='kyong'>Kyong (Korean male)</option> 
+            <option value='leah'>Leah (Norwegian female)</option> 
+            <option value='lucas'>Lucas (Norwegian male)</option> 
+            <option value='amelia'>Amelia (Polish female)</option> 
+            <option value='filip'>Filip (Polish male)</option> 
+            <option value='maria'>Maria (Portugese female)</option> 
+            <option value='tomas'>Tomas (Portugese male)</option> 
+            <option value='nadia'>Nadia (Russian female)</option> 
+            <option value='anatoly'>Anatoly (Russian male)</option> 
+            <option value='laura'>Laura (Slovak female)</option> 
+            <option value='lilly'>Lilly (Swedish female)</option> 
+            <option value='defne'>Defne (Turkish female)</option> 
+            <option value='yusuf'>Yusuf (Turkish male)</option> 
+            <option value='alina'>Alina (Ukranian female)</option> 
+            <option value='bian'>Bian (Vietnamese female)</option> 
+            <option value='danh'>Danh (Vietnamese male)</option>
         </select>
     </div>
+	
+	<div class="form-row">
+        <label for="node-input-rate"><i class="icon-tag"></i>Speaking rate</label>
+        <select id="node-input-rate">
+            <option value=0.25>0.25</option>
+            <option value=0.50>0.50</option>
+            <option value=0.75>0.75</option>
+            <option value=1.0 selected>1.0</option>
+            <option value=1.25>1.25</option>
+            <option value=1.50>1.50</option>
+            <option value=1.75>1.75</option>
+            <option value=2.0>2.0</option>
+            <option value=2.25>2.25</option>
+            <option value=2.50>2.50</option>
+            <option value=2.75>2.75</option>
+            <option value=3.0>3.0</option>
+            <option value=3.25>3.25</option>
+            <option value=3.50>3.50</option>
+            <option value=3.75>3.75</option>
+            <option value=4.0>4.0</option>
+        </select>
+	</div> 
+	
+	<div class="form-row">
+		<label for="node-input-pitch"><i class="icon-tag"></i>Pitch</label>
+		<input type="number" value=0 id="node-input-pitch">
+	</div>
+	
+	<div class="form-row">
+		<label for="node-input-volume"><i class="icon-tag"></i>Volume gain</label>
+		<input type="number" value=0 id="node-input-volume">
+	</div>
+	
+	<div class="form-row">
+		<label for="node-input-sample"><i class="icon-tag"></i>Sample rate (Hz)</label>
+		<input type="number" id="node-input-sample" value="24000" placeholder="sample rate (Hz)">
+	</div>
+	
+	<div class="form-row">
+		<label for="node-input-encoding"><i class="icon-tag"></i>Audio encoding</label>
+		<select id="node-input-encoding">
+			<option value='MP3' selected>MP3</option>
+			<option value='LINEAR16'>LINEAR16</option>
+			<option value='OGG_OPUS'>OGG_OPUS</option>
+		</select>
+	</div>
+
+	<div>
+		<h6><p>Learn more about audio config options <a href="https://cloud.google.com/text-to-speech/docs/reference/rest/v1/text/synthesize">here</a></p></h6>
+	</div>
 </script>
 
 <script type="text/x-red" data-template-name="wavenet-config">
@@ -82,10 +202,57 @@
     <h2>Convert text to speech using Google Wavenet voice.</h2>
     <br>
     <p>
-        Wavenet voice represents a new way of creating synthetic speech, using a <strong>WaveNet</strong> model, the same technology used to produce speech for Google Assistant, Google Search, and Google Translate.
+        Wavenet voice represents a new way of creating synthetic speech, using a <strong>WaveNet</strong> model, the same technology used to produce speech for Google Assistant, Google Search and Google Translate.
     </p>
     <br>
-    Takes a <code>string</code> as an input. Returns a <code>base64</code> encoded array buffer. Attach a file node to save it as an MP3 on your disk.
-    <img src="https://imgur.com/WyF9hBt.png" alt="main flow">
-    <br>    
+    Takes a <code>string</code> as an input. Returns a <code>base64</code> encoded array buffer. Attach a file node to save it as an audio on your disk.
+
+    <br>
+    <img src="https://raw.githubusercontent.com/balsimpson/node-red-contrib-wavenet/wavenet_screenshot.png" alt="main flow">
+    <br>
+
+    #### Sign in to <a href="https://cloud.google.com/text-to-speech/">Google Developer Console</a> to get a Speech API key.
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string</span>
+        </dt>
+        <dd> Use SSML in your text string to give it more personality. You can use all SSML elements mentioned <a href="https://cloud.google.com/text-to-speech/docs/reference/rest/v1/text/synthesize">here.</a></dd>
+        <dt>voice
+            <span class="property-type">string</span>
+        </dt>
+        <dd> Choose a specific voice or random</dd>
+        <dt>Speaking rate
+            <span class="property-type">number | 0.25 to 4.0</span>
+        </dt>
+        <dd> In the range of 0.25 to 4.0. 1.0 is the normal native speed. 2.0 is twice as fast, and 0.5 is half as fast.</dd>
+        <dt>Pitch
+            <span class="property-type">number | -20 to +20</span>
+        </dt>
+        <dd> In the range -20.0 to 20.0. 20 means increase 20 semitones from the original pitch. -20 means decrease 20 semitones from the original pitch.</dd>
+        <dt>Volume
+            <span class="property-type">number | -6 to +6</span>
+        </dt>
+        <dd> A value of -6.0 (dB) will play at approximately half the amplitude and a value of +6.0 (dB) will play at approximately twice the amplitude of the normal native signal.</dd>
+        <dt>Sample rate
+            <span class="property-type">number</span>
+        </dt>
+        <dd> The synthesis sample rate (in hertz). When this is specified, the synthesizer will honor this request by converting to the desired sample rate. Default is 24000.</dd>
+        <dt>Audio encoding
+            <span class="property-type">string</span>
+        </dt>
+        <dd> The encoding format of the audio byte stream can be MP3, LINEAR16 or OGG_OPUS</dd>
+    </dl>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li>Standard output
+            <dl class="message-properties">
+                <dt>payload <span class="property-type">string | base64</span></dt>
+                <dd> A base64-encoded string that is wrapped in containers according to the encoding specified.
+                </dd>
+            </dl>
+        </li>
+    </ol>
 </script>
