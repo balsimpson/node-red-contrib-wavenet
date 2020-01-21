@@ -34,7 +34,7 @@
         outputs: 1,
         icon: "feed.png",
         label: function () {
-            return this.name || "wavenet";
+            return this.voice || "wavenet";
         },
         oneditprepare: function() {
             $("#node-input-voice").val(this.voice || "random");
