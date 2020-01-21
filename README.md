@@ -7,7 +7,7 @@ Wavenet voice represents a new way of creating synthetic speech, using a **WaveN
 
 Takes a `string` as an input. Returns a `base64` encoded array buffer. Attach a file node to save it as an audio file on your disk.
 
-![main flow](https://raw.githubusercontent.com/balsimpson/node-red-contrib-wavenet/dev/wavenet_screenshot.png)
+![main flow](https://raw.githubusercontent.com/balsimpson/node-red-contrib-wavenet/wavenet_screenshot.png)
 
 #### Sign in to <a href="https://cloud.google.com/text-to-speech/">Google Developer Console</a> to get a Speech API key.
 

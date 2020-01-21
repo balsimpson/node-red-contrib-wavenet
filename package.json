@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-wavenet",
-  "version": "2.9.2",
+  "version": "3.0.1",
   "description": "Easily convert text to speech using Google Wavenet voices on Node-RED.",
   "main": "index.js",
   "scripts": {
