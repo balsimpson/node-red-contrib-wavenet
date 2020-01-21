@@ -208,7 +208,7 @@
     Takes a <code>string</code> as an input. Returns a <code>base64</code> encoded array buffer. Attach a file node to save it as an audio on your disk.
 
     <br>
-    <img src="https://imgur.com/WyF9hBt.png" alt="main flow">
+    <img src="https://raw.githubusercontent.com/balsimpson/node-red-contrib-wavenet/dev/wavenet_screenshot.png" alt="main flow">
     <br>
 
     <h3>Inputs</h3>
@@ -236,11 +236,11 @@
         <dt>Sample rate
             <span class="property-type">number</span>
         </dt>
-        <dd> The synthesis sample rate (in hertz). When this is specified, the synthesizer will honor this request by converting to the desired sample rate.</dd>
+        <dd> The synthesis sample rate (in hertz). When this is specified, the synthesizer will honor this request by converting to the desired sample rate. Default is 24000.</dd>
         <dt>Audio encoding
             <span class="property-type">string</span>
         </dt>
-        <dd> The format of the audio byte stream.</dd>
+        <dd> The encoding format of the audio byte stream can be MP3, LINEAR16 or OGG_OPUS</dd>
     </dl>
 
     <h3>Outputs</h3>

@@ -529,7 +529,7 @@ const getAudioFile = async (txt, data) => {
 		method: 'POST'
 	};
 
-	console.log(`options: ${JSON.stringify(options, null, 2)}`);
+	// console.log(`options: ${JSON.stringify(options, null, 2)}`);
 	let resp = await makeHttpCall(options);
 	if (resp.error) {
 		return { error: resp.error.message };
@@ -566,17 +566,16 @@ module.exports = function (RED) {
 					node.error(value.error);
 				} else {
 					try {
-						// console.log('getting file:');
 						var load = value.replace(/\s+/g, '');      // remove any whitespace
 						if (regexp.test(load) && (load.length % 4 === 0)) {
 							value = Buffer.from(load, 'base64');
 							node.status({ fill: 'green', shape: 'dot', text: `${voice.languageCode} - ${voice.ssmlGender}` });
 							msg.payload = value;
-							msg.voice = voice;
+							// msg.voice = voice;
 							node.send(msg);
 						}
 						else {
-							node.log('Not a Base64 string - maybe we should encode it...');
+							node.log('Not a Base64 string');
 							value = Buffer.from(value).toString('base64');
 							node.status({ fill: 'green', shape: 'ring', text: `${voice.languageCode} - ${voice.ssmlGender}` });
 							msg.payload = value;
