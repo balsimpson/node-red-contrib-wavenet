@@ -37,6 +37,7 @@
             return this.name || "wavenet";
         },
         oneditprepare: function() {
+            $("#node-input-voice").val(this.voice || "random");
             $("#node-input-rate").val(this.rate || "1.0");
             $("#node-input-pitch").val(this.pitch || 0);
             $("#node-input-volume").val(this.volume || 0);
