@@ -3,6 +3,8 @@
 
 #### Update: Now with 60+ voices with options to adjust speaking rate, pitch, volume, sample rate and audio encoding.
 
+###### Added Danish voices
+
 Wavenet voice represents a new way of creating synthetic speech, using a **WaveNet** model, the same technology used to produce speech for Google Assistant, Google Search, and Google Translate.
 
 Takes a `string` as an input. Returns a `base64` encoded array buffer. Attach a file node to save it as an audio file on your disk.

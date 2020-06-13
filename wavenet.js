@@ -1,6 +1,18 @@
 const https = require('https');
 
 let voice_options = {
+	anne: {
+		language: 'da-DK',
+		gender: 'female',
+		wav: 'da-DK-Wavenet-D',
+		text: 'Danish female'
+	},
+	lucas: {
+		language: 'da-DK',
+		gender: 'male',
+		wav: 'da-DK-Wavenet-C',
+		text: 'Danish male'
+	},
 	janjaap: {
 		language: 'nl-Nl',
 		gender: 'male',
