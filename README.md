@@ -1,9 +1,11 @@
 # node-red-contrib-wavenet
-## Convert text to speech using Google Wavenet voice.
+## A Node-RED custom node to convert text to speech using Google Wavenet voice.
 
 #### Update: Now with 60+ voices with options to adjust speaking rate, pitch, volume, sample rate and audio encoding.
 
-###### Added Danish voices
+**Latest languages added:**
+>- Added Arabic voices 
+>- Added Danish voices
 
 Wavenet voice represents a new way of creating synthetic speech, using a **WaveNet** model, the same technology used to produce speech for Google Assistant, Google Search, and Google Translate.
 

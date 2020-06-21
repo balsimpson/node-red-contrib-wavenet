@@ -197,7 +197,7 @@ let voice_options = {
 		language: 'en-IN',
 		gender: 'female',
 		wav: 'en-IN-Wavenet-A',
-		text: 'Inidan female'
+		text: 'Indian female'
 	},
 	rahul: {
 		language: 'en-IN',
@@ -399,75 +399,6 @@ let voice_options = {
 	}
 }
 
-let voice_wavs = [
-	'janjaap',
-	'kees',
-	'sjaan',
-	'bep',
-	'miep',
-	'russel',
-	'thomas',
-	'nicole',
-	'mary',
-	'brian',
-	'paul',
-	'emma',
-	'amy',
-	'mathew',
-	'justin',
-	'joanna',
-	'ivy',
-	'kimberly',
-	'salli',
-	'ella',
-	'amina',
-	'amir',
-	'chen',
-	'chang',
-	'hu',
-	'mei',
-	'annya',
-	'kuan',
-	'lucie',
-	'sofia',
-	'ben',
-	'lyra',
-	'aparna',
-	'rahul',
-	'darna',
-	'olivia',
-	'liam',
-	'sarah',
-	'victor',
-	'simran',
-	'jai',
-	'nora',
-	'melati',
-	'agung',
-	'gabriella',
-	'antonio',
-	'yuna',
-	'asahi',
-	'misun',
-	'kyong',
-	'leah',
-	'lucas',
-	'amelia',
-	'filip',
-	'ana',
-	'maria',
-	'tomas',
-	'nadia',
-	'anatoly',
-	'laura',
-	'lilly',
-	'defne',
-	'yusuf',
-	'alina',
-	'bian',
-	'danh'
-]
-
 const makeHttpCall = async (options) => {
 	try {
 		return new Promise((resolve) => {
@@ -500,7 +431,7 @@ const randomItem = (arrayOfItems) => {
 };
 
 const getVoice = (voice) => {
-	voice = (voice == 'random') ? randomItem(voice_wavs) : voice;
+	voice = (voice == 'random') ? randomItem(Object.keys(voice_options)) : voice;
 	let chosen = voice_options[voice];
 	let data = {
 		languageCode: chosen.language,
@@ -516,6 +447,7 @@ const getAudioFile = async (txt, data) => {
 		host: 'texttospeech.googleapis.com',
 		port: 443,
 		path: '/v1/text:synthesize',
+		// path: '/v1/voices',
 		headers: {
 			'Content-Type': 'application/json',
 			'charset': 'utf-8',
@@ -539,6 +471,29 @@ const getAudioFile = async (txt, data) => {
 			}
 		},
 		method: 'POST'
+	};
+
+	// console.log(`options: ${JSON.stringify(options, null, 2)}`);
+	let resp = await makeHttpCall(options);
+	if (resp.error) {
+		return { error: resp.error.message };
+	} else {
+		return resp.audioContent;
+	}
+}
+
+const getAllVoices = async (key) => {
+
+	let options = {
+		host: 'texttospeech.googleapis.com',
+		port: 443,
+		path: '/v1/voices',
+		headers: {
+			'Content-Type': 'application/json',
+			'charset': 'utf-8',
+			'X-Goog-Api-Key': `${key}`
+		},
+		method: 'GET'
 	};
 
 	// console.log(`options: ${JSON.stringify(options, null, 2)}`);
