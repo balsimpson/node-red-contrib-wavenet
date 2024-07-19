@@ -514,17 +514,19 @@ module.exports = function (RED) {
 			let key = RED.nodes.getNode(config.key);
 			let txt = msg.payload;
 
-			let voice = getVoice(config.voice);
-			voice.key = key.speech_api;
+			//Checks to see if the msg contains any overriding values before defaulting to config
+			let voice = msg.voice != null ? msg.voice : getVoice(config.voice);
 
 			// get audio config options
 			voice.config = {
-				rate: config.rate,
-				pitch: config.pitch,
-				volume: config.volume,
-				sample: config.sample,
-				encoding: config.encoding
+				rate: msg.rate != null ? msg.rate : config.rate,
+				pitch: msg.pitch != null ? msg.pitch : config.pitch,
+				volume: msg.volume != null ? msg.volume : config.volume,
+				sample: msg.sample != null ? msg.sample : config.sample,
+				encoding: msg.encoding != null ? msg.encoding : config.encoding
 			}
+
+			voice.key = key.speech_api;
 
 			let audioContent = getAudioFile(txt, voice);
 			audioContent.then((value) => {
