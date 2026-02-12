@@ -16,7 +16,7 @@ Takes a `string` as an input. Returns a `base64` encoded array buffer. Attach a 
 ## Inputs
 
 payload (_string_)
-- Use SSML elements in your text to give it more personality. You can use all elements found [here](https://cloud.google.com/text-to-speech/docs/reference/rest/v1/text/synthesize).
+- Use SSML elements in your text to give it more personality. You can use all elements found [here](https://docs.cloud.google.com/text-to-speech/docs/ssml).
 
 The following can be used to override the config set in the node:
 
